@@ -1,41 +1,37 @@
 const list = document.querySelector('#contacts');
-const contacts =  [
-    {
-        "firstName": "John",
-        "lastName": "Snow",
-        "email": "ghost@example.com",
-    },
-    {
-        "firstName": "Geralt",
-        "lastName": "of Rivia",
-        "email": "whitewolf@example.com",
-    },
-    {
-        "firstName": "Pavlin",
-        "lastName": "Petrov",
-        "email": "ppetrov@example.com",
+const req = new Request('http://localhost:3000/api/contacts/', {
+    method: 'GET',
+    headers: {
+        "Content-Type": "application/json"
     }
-];
+});
+
 let listMarkup = '';
 
+fetch(req)
+    .then(res => res.json())
+    .then(data => {
+        console.log(data.result);
+        
+        data.result.forEach(contact => {
+            const { firstName, lastName, email } = contact;
+        
+            listMarkup += `
+                <li>
+                    <div class="name">${firstName} ${lastName}</div>
+        
+                    <a href="mailto:${email}" class="email" target="_self">${email}</a>
+                </li>
+            `;
+        });
+
+        list.innerHTML = listMarkup;
+    });
+
 list.addEventListener('click', event => {
-	if (event.target.classList.contains('email')) {
+    if (event.target.classList.contains('email')) {
         chrome.tabs.update({
             url: event.target.href
         });
-	}
+    }
 });
-
-contacts.forEach(contact => {
-    const { firstName, lastName, email } = contact;
-
-    listMarkup += `
-        <li>
-            <div class="name">${firstName} ${lastName}</div>
-
-            <a href="mailto:${email}" class="email" target="_self">${email}</a>
-        </li>
-    `;
-});
-
-list.innerHTML = listMarkup;
