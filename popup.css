@@ -1,0 +1,11 @@
+body { background-color: #433E49 ; color: #F3E8EB; }
+
+.wrapper { min-width: 250px; }
+.wrapper h1 { margin: 0; text-align: center; color: #DBC1AD; }
+
+.contacts { margin: 0; padding: 0; list-style: none; font-size: 18px; }
+.contacts li { position: relative; padding: 2px 0; }
+.contacts li:hover .email { width: 100%; left: 0; }
+.contacts .email { padding-left: 15px; position: absolute; bottom: 0; left: calc(100% + 10px); right: 0; background-color: #928490; overflow: hidden; width: 0; height: 100%; transition: .5s ease; }
+.contacts .email:before { content: ''; position: absolute; top: 0; left: 0; width: 0; height: 0; border-style: solid; border-width: 12px 12px 0 0; border-color: #433E49 transparent transparent transparent; }
+.contacts a { text-decoration: none;  color: inherit; }
