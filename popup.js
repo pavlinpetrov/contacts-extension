@@ -10,9 +10,7 @@ let listMarkup = '';
 
 fetch(req)
     .then(res => res.json())
-    .then(data => {
-        console.log(data.result);
-        
+    .then(data => {    
         data.result.forEach(contact => {
             const { firstName, lastName, email } = contact;
         
